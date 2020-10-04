@@ -108,7 +108,7 @@ Alternatively, you can use a tool like [Netron](https://github.com/lutzroeder/ne
 
 ### Model Semantics
 
-The semantics of an inference-model is a _stateless function_ (except possibly for the state used for random-number generation). Thus, whenever an inference-model (without random-generator operations) is used to perform inference on the same input, it is expeced to produce the same output.
+The semantics of an inference-model is a _stateless function_ (except possibly for the state used for random-number generation). Thus, whenever an inference-model (without random-generator operations) is used to perform inference on the same input, it is expected to produce the same output.
 
 The semantics of a training-model is that of a _stateful object_, with the state consisting of the current values of trained-weights (and any other auxiliary state required, such as momentum, for example, used by the learning algorithm). Specifically, its semantics is captured via three methods: an initialization method (which is used to initialize or reset the values of state variables), a training-step method (to train using a batch of input-output pairs), and an inference method to perform inference using the current values of the learned weights. The first two methods update the state of the object, while the third method is side-effect-free.
 
@@ -145,7 +145,8 @@ operator|Operator[]|The operators of this operator set.
 
 The operator set version is a simple integer value that is monotonically increased as new versions of the operator set are published.
 
-Operator sets other than the default operator set MUST specify its domain and SHOULD use reverse domain names based on the responsible organization's identity, the same convention that is used for [naming Java packages](https://docs.oracle.com/javase/tutorial/java/package/namingpkgs.html).
+Operator sets other than the default operator set MUST specify its domain and SHOULD generally use reverse domain names based on the responsible organization's identity, the same convention that is used for [naming Java packages](https://docs.oracle.com/javase/tutorial/java/package/namingpkgs.html).
+
 
 ### Operators
 
@@ -160,11 +161,18 @@ since_version|int64|The version of the operator set when this operator was intro
 status|OperatorStatus|One of ‘EXPERIMENTAL’ or ‘STABLE.’
 doc_string|string|A human-readable documentation string for this operator. Markdown is allowed.
 
+Possible Example:AcommonMathsfunc|Arithmetictype|A very common maths function that is definitely used in every day life.
+|---|---|---|
+ACommonMathsFunc
+since version 0.001
+"STABLE"
+It actually just do a summation,a good example is a+b.But the smart programmer make it very complex for performance and weird naming.The official doc from programmer did not tell you that you actually need to input a and b,the a and b is a just a integer,don't ask me what bit i do not know.
+
 The version value MUST be the same value as the operator set version when the operator was first published. Subsequent versions of the operator set MUST NOT alter the signature or semantics of the operator once published as STABLE.
 
 The ‘status’ property indicates whether the syntax, semantics, or presence of the operator is in an experimental or stable stage. Once an operator is published as STABLE, it’s syntax and semantics MUST NOT change in subsequent versions of the operator set.
 
-There are two distinct ways to pass information to operators – inputs and attributes. The latter are used for values that are constants in the graph, while the former represent graph inputs or values computed elsewhere in the graph. This distinction may be highly relevant to achieving good performance for some implementations, while completely irrelevant to others.
+There are two known distinct ways to pass information to operators – inputs and attributes. The latter are used for values that are constants in the graph, while the former represent graph inputs or values computed elsewhere in the graph. This distinction may be highly relevant to achieving good performance for some implementations, while completely irrelevant to others.
 
 ### Graphs
 
